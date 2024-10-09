@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tutorials - Python Learning Hub</title>
+</head>
+<body>
+    <h2>Python Tutorials</h2>
+    <ul>
+        <li><a href="/tutorials/variables">Python Variables</a></li>
+        <!-- Add more topics as needed -->
+    </ul>
+    {% if 'completed_tutorials' in session %}
+        <p>Completed Tutorials:</p>
+        <ul>
+        {% for tutorial in session['completed_tutorials'] %}
+            <li>{{ tutorial }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

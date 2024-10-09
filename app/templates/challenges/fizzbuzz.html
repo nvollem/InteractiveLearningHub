@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>FizzBuzz Challenge</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/codemirror.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.1/mode/python/python.min.js"></script>
+</head>
+<body>
+    <h2>FizzBuzz Challenge</h2>
+    <p>Write a Python program that prints the numbers from 1 to 100. But for multiples of three, print "Fizz" instead of the number, and for the multiples of five, print "Buzz". For numbers that are multiples of both three and five, print "FizzBuzz".</p>
+    
+    <textarea id="editor" rows="10" cols="80"># Write your code here</textarea>
+    <button onclick="runPython()">Run</button>
+    <div id="output"></div>
+
+    <script>
+        var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
+            lineNumbers: true,
+            mode: "python",
+            theme: "default"
+        });
+        function runPython() {
+            const outputArea = document.getElementById("output");
+            outputArea.innerHTML = '';
+
+            Sk.configure({ 
+                output: (text) => outputArea.innerHTML += text + '<br>', 
+                read: (x) => { 
+                    if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined) {
+                        throw "File not found: '" + x + "'";
+                    }
+                    return Sk.builtinFiles["files"][x];
+                }
+            });
+
+            (Sk.importMainWithBody("<stdin>", false, editor.getValue(), true));
+        }
+    </script>
+</body>
+</html>

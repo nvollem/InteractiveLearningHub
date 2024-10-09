@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>User Profile</title>
+</head>
+<body>
+    <h2>Welcome, {{ current_user.username }}</h2>
+    <h3>Progress:</h3>
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: {{ (current_user.completed_tutorials|length / total_tutorials) * 100 }}%" aria-valuenow="{{ current_user.completed_tutorials|length }}" aria-valuemin="0" aria-valuemax="{{ total_tutorials }}"></div>
+    </div>
+    <h3>Completed Tutorials:</h3>
+    <ul>
+        {% for tutorial in current_user.completed_tutorials %}
+            <li>{{ tutorial }}</li>
+        {% endfor %}
+    </ul>
+    <h3>Completed Challenges:</h3>
+    <ul>
+        {% for challenge in current_user.completed_challenges %}
+            <li>{{ challenge }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
